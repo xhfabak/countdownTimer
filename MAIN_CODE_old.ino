@@ -74,8 +74,8 @@ void buzz(int duration) {
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void update_timer() {
-  if (minutes == 5 && seconds == 1 && milliseconds == 0) {buzz(70);}  
-  if (minutes == 3 && seconds == 0 && milliseconds == 2) {buzz(90);}
+  if (minutes == 5 && seconds == 0 && milliseconds == 0) {buzz(70);}  
+  if (minutes == 3 && seconds == 0 && milliseconds == 0) {buzz(90);}
   if (minutes == 1 && seconds == 0 && milliseconds == 0) {buzz(150);}
   if (minutes == 0 && seconds == 30 && milliseconds == 0) {buzz(200);}
   if (minutes == 0 && seconds <= 10 && milliseconds == 0) {buzz(200);}
