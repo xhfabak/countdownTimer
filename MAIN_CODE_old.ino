@@ -79,23 +79,25 @@ void update_timer() {
   if (minutes == 1 && seconds == 0 && milliseconds == 0) {buzz(150);}
   if (minutes == 0 && seconds == 30 && milliseconds == 0) {buzz(200);}
   if (minutes == 0 && seconds <= 10 && milliseconds == 0) {buzz(200);}
+  
   if (minutes == 0 && seconds == 0 && milliseconds == 0) {
     started = false;
     buzz(1000);
     return;
     } 
-  if (seconds == 0 && minutes != 0)
+
+  milliseconds --;
+  
+  if (minutes != 0 && seconds == 0 && milliseconds == 0)
   {
     seconds = 59;
+    milliseconds = 99;
     minutes --;
   }  
-  else if (milliseconds == 0 && seconds != 0) 
+  else if (seconds != 0 && milliseconds == 0) 
   {
     milliseconds = 99;
     seconds --;
-  }
-  else {
-    milliseconds --;
   }
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -129,7 +131,7 @@ void loop(){
   current_time = millis();
   if (current_time >= next_update) {
     tmer();
-    next_update = current_time + 10;
+    next_update = current_time + 10;  // 10ms
   }
   check_press();
 }
