@@ -82,8 +82,8 @@ void update_timer() {
   if (minutes == 0 && seconds == 0 && milliseconds == 0) {
     started = false;
     buzz(1000);
+    return;
     } 
-
   if (seconds == 0 && minutes != 0)
   {
     seconds = 59;
@@ -127,11 +127,9 @@ void check_press(){
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void loop(){
   current_time = millis();
-
   if (current_time >= next_update) {
     tmer();
     next_update = current_time + 10;
   }
-
   check_press();
 }
