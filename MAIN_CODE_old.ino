@@ -9,8 +9,7 @@ signed short minutes = 10, seconds = 0, milliseconds = 0;  // Set time for Count
 char timeline[16];  // Display timer
 int count = 0;  // for button to check how long button is pressed;
 boolean action = true; // for button and "count";
-boolean treset = false;
-boolean started = false;
+boolean started = false;  // Setting settings to start or not start countdown timer.
 volatile int output = LOW; // Interrupt pin changes state
 int timeint = 10;  // ms for time (default value = 10)
 unsigned long current_time = 0;  // time
