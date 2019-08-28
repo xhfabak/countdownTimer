@@ -12,7 +12,7 @@ boolean action = true; // for button and "count";
 boolean treset = false;
 boolean started = false;
 volatile int output = LOW; // Interrupt pin changes state
-int i = 0;
+int timeint = 10;  // ms for time (default value = 10)
 unsigned long current_time = 0;  // time
 unsigned long next_update = 0;  // time
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ void reset_timer() {
   minutes = 10;
   seconds = 0;
   milliseconds = 0;
-  buzz(100);
+  buzz(100);  // ms
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void tmer() {
@@ -65,7 +65,7 @@ void Interrupt() {
     if (count>=1) { }   // Count 1 * 50 = 50ms
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void buzz(int duration) {
+void buzz(int duration) { // duration = ms
   digitalWrite(BUTPLUS, HIGH); // ON - Button yellow LED
   digitalWrite(BUZZER, HIGH);  // ON - buzzer
   delay(duration);
@@ -74,13 +74,13 @@ void buzz(int duration) {
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void update_timer() {
-  if (minutes == 5 && seconds == 0 && milliseconds == 0) {buzz(70);}  
+  if (minutes == 5 && seconds == 0 && milliseconds == 0) {buzz(70);}
   if (minutes == 3 && seconds == 0 && milliseconds == 0) {buzz(90);}
   if (minutes == 1 && seconds == 0 && milliseconds == 0) {buzz(150);}
   if (minutes == 0 && seconds == 30 && milliseconds == 0) {buzz(200);}
   if (minutes == 0 && seconds <= 10 && milliseconds == 0) {buzz(200);}
-  
-  if (minutes == 0 && seconds == 0 && milliseconds == 0) {
+
+  if (minutes == 00 && seconds == 00 && milliseconds == 00) {
     started = false;
     buzz(1000);
     return;
@@ -88,13 +88,13 @@ void update_timer() {
 
   milliseconds --;
   
-  if (minutes != 0 && seconds == 0 && milliseconds == 0)
+  if (minutes != 00 && seconds == 0 && milliseconds == -1)
   {
     seconds = 59;
     milliseconds = 99;
     minutes --;
   }  
-  else if (seconds != 0 && milliseconds == 0) 
+  else if (seconds != 0 && milliseconds == -1) 
   {
     milliseconds = 99;
     seconds --;
@@ -131,7 +131,7 @@ void loop(){
   current_time = millis();
   if (current_time >= next_update) {
     tmer();
-    next_update = current_time + 10;  // 10ms
+    next_update = current_time + timeint;
   }
   check_press();
 }
